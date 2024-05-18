@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Retro Audio Player</title>
+    <link rel="stylesheet" href="https://dimden.dev/fonts/Pixel_NES.ttf">
+    <style>
+        @font-face {
+            font-family: 'Pixel NES';
+            src: url('https://dimden.dev/fonts/Pixel_NES.ttf') format('truetype');
+        }
+
+        body {
+            font-family: 'Pixel NES', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://64.media.tumblr.com/dba4287d1c0a5fb9cbafee46ae3630fa/a629fc096fa49cb6-6d/s2048x3072/bc2e3c336c6e7c1d4a8a95781ae2f1e732ae8311.gif');
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .play-button {
+            width: 200px;
+            height: 200px;
+            background-image: url('https://art.pixilart.com/a0bfde2ec80dbe7.png');
+            background-size: cover;
+            cursor: pointer;
+        }
+
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="play-button" onclick="toggleAudio()"></div>
+        <audio id="myAudio" controls loop>
+            <source id="audioSource" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        function toggleAudio() {
+            var audio = document.getElementById("myAudio");
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        // Get audio URL from URL parameter using URLSearchParams API
+        var urlParams = new URLSearchParams(window.location.search);
+        var audioUrl = urlParams.get('audio');
+        if (audioUrl) {
+            var audioElement = document.getElementById('audioSource');
+            audioElement.src = audioUrl;
+        }
+    </script>
+</body>
+</html>
